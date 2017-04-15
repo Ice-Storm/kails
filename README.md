@@ -1,4 +1,4 @@
-#koa2-api-boilerplate
+#kails
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
 
 Boilerplate for building APIs with [koa2](https://github.com/koajs/koa/tree/v2.x) and mongodb.
@@ -16,7 +16,7 @@ This project covers basic necessities of most APIs.
 
 ##Installation
 ```bash
-git clone https://github.com/adrianObel/koa2-api-boilerplate.git
+git clone https://github.com/Ice-Storm/kails.git
 ```
 
 ##Features
