@@ -1,7 +1,7 @@
 # kails
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
 
-Boilerplate for building APIs with [koa2](https://github.com/koajs/koa/tree/v2.x) and mongodb.
+Kails for building APIs with [koa2](https://github.com/koajs/koa/tree/v2.x) and mongodb.
 
 This project covers basic necessities of most APIs.
 * Authentication (passport & jwt)
