@@ -1,6 +1,6 @@
 {
   "name": "kails",
-  "version": "2.2.0",
+  "version": "0.0.1",
   "description": "Koa2 boilerplate covering essentials for APIs",
   "main": "index.js",
   "scripts": {
@@ -31,6 +31,9 @@
     "type": "git",
     "url": "https://github.com/adrianObel/koa2-api-boilerplate"
   },
+  "bin": {
+    "kails": "./bin/kails.js"
+  },
   "dependencies": {
     "apidoc": "^0.16.1",
     "babel-core": "^6.5.1",
@@ -57,10 +60,12 @@
     "babel-register": "^6.5.1",
     "bluebird": "^3.5.0",
     "chai": "^3.5.0",
+    "commander": "^2.9.0",
     "eslint": "^3.4.0",
     "eslint-config-standard": "^6.0.0",
     "eslint-plugin-promise": "^2.0.1",
     "eslint-plugin-standard": "^2.0.0",
+    "mkdirp": "^0.5.1",
     "mocha": "^3.0.2",
     "nodemon": "^1.8.1",
     "supertest": "^2.0.0"
