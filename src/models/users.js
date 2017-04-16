@@ -1,7 +1,8 @@
 import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
-import config from '../../config'
+import Promise from 'bluebird'
 import jwt from 'jsonwebtoken'
+import config from '../../config'
 
 const User = new mongoose.Schema({
   type: { type: String, default: 'User' },
@@ -10,47 +11,27 @@ const User = new mongoose.Schema({
   password: { type: String, required: true }
 })
 
-User.pre('save', function preSave (next) {
-  const user = this
-
-  if (!user.isModified('password')) {
-    return next()
+User.pre('save', async function preSave (next) {
+  try {
+    const salt = await Promise.promisify(bcrypt.genSalt)(10)
+    const hash = await Promise.promisify(bcrypt.hash)(this.password, salt)
+    this.password = hash
+    next(null)
+  } catch(err) {
+    next(err)
   }
-
-  new Promise((resolve, reject) => {
-    bcrypt.genSalt(10, (err, salt) => {
-      if (err) { return reject(err) }
-      resolve(salt)
-    })
-  })
-  .then(salt => {
-    bcrypt.hash(user.password, salt, (err, hash) => {
-      if (err) { throw new Error(err) }
-
-      user.password = hash
-
-      next(null)
-    })
-  })
-  .catch(err => next(err))
 })
 
-User.methods.validatePassword = function validatePassword (password) {
-  const user = this
-
-  return new Promise((resolve, reject) => {
-    bcrypt.compare(password, user.password, (err, isMatch) => {
-      if (err) { return reject(err) }
-
-      resolve(isMatch)
-    })
-  })
+User.methods.validatePassword = async function validatePassword (password) {
+  try {
+    return await Promise.promisify(bcrypt.compare)(password, this.password)
+  } catch (err) {
+    next(err)
+  }
 }
 
 User.methods.generateToken = function generateToken () {
-  const user = this
-
-  return jwt.sign({ id: user.id }, config.token)
+  return jwt.sign({ id: this.id }, config.token)
 }
 
 export default mongoose.model('user', User)

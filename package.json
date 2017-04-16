@@ -1,5 +1,5 @@
 {
-  "name": "koa2-api-boilerplate",
+  "name": "kails",
   "version": "2.2.0",
   "description": "Koa2 boilerplate covering essentials for APIs",
   "main": "index.js",
@@ -11,7 +11,7 @@
     "docs": "./node_modules/.bin/apidoc -i src/ -o docs"
   },
   "keywords": [
-    "koa2-api-boilerplate",
+    "Kails",
     "api",
     "koa",
     "koa2",
@@ -21,10 +21,10 @@
     "passportjs",
     "apidoc"
   ],
-  "author": "Adrian Obelmejias <adrian@obel.me>",
+  "author": "Qyuan <hehao020140@gmail.com>",
   "license": "MIT",
   "apidoc": {
-    "title": "koa2-api-boilerplate",
+    "title": "kails",
     "url": "localhost:5000"
   },
   "repository": {
@@ -55,6 +55,7 @@
   "devDependencies": {
     "babel-eslint": "^6.0.2",
     "babel-register": "^6.5.1",
+    "bluebird": "^3.5.0",
     "chai": "^3.5.0",
     "eslint": "^3.4.0",
     "eslint-config-standard": "^6.0.0",
