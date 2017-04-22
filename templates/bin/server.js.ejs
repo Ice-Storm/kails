@@ -11,28 +11,28 @@ import serve from 'koa-static'
 import config from '../config'
 import { errorMiddleware } from '../src/middleware'
 
-const app = new Koa()
-app.keys = [config.session]
+const <%= app %> = new Koa()
+<%= app %>.keys = [config.session]
 
 mongoose.Promise = global.Promise
 mongoose.connect(config.database)
 
-app.use(convert(logger()))
-app.use(bodyParser())
-app.use(session())
-app.use(errorMiddleware())
+<%= app %>.use(convert(logger()))
+<%= app %>.use(bodyParser())
+<%= app %>.use(session())
+<%= app %>.use(errorMiddleware())
 
-app.use(convert(mount('/docs', serve(`${process.cwd()}/docs`))))
+<%= app %>.use(convert(mount('/docs', serve(`${process.cwd()}/docs`))))
 
 require('../config/passport')
-app.use(passport.initialize())
-app.use(passport.session())
+<%= app %>.use(passport.initialize())
+<%= app %>.use(passport.session())
 
 const modules = require('../src/modules')
-modules(app)
+modules(<%= app %>)
 
-app.listen(config.port, () => {
+<%= app %>.listen(config.port, () => {
   console.log(`Server started on ${config.port}`)
 })
 
-export default app
+export default <%= app %>
