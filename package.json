@@ -29,10 +29,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/adrianObel/koa2-api-boilerplate"
+    "url": "https://github.com/Ice-Storm/kails"
   },
   "bin": {
-    "kails": "./templates/kails.js"
+    "kails": "./bin/kails.js"
   },
   "dependencies": {
     "apidoc": "^0.16.1",
