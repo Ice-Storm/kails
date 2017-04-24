@@ -1,14 +1,14 @@
-import <%= modalInstance %> from '../../models/<%= modal %>'
+import <%= modelInstance %> from '../../models/<%= model %>'
 
 /**
- * @api {post} /<%= modal %> Create a new <%= modalName %>
- * @apiPermission <%= modalName %>
+ * @api {post} /<%= model %> Create a new <%= modelName %>
+ * @apiPermission <%= modelName %>
  * @apiVersion <%= version %>
- * @apiName <%- `Create${modalInstance}` %>
- * @apiGroup <%= modalInstance %>
+ * @apiName <%- `Create${modelInstance}` %>
+ * @apiGroup <%= modelInstance %>
  *
- * @apiParam {Object} <%= modalName %>          <%= modalInstance %> object (required)
- * @apiSuccess {Object}   <%= modal %>           <%= modalInstance %> object
+ * @apiParam {Object} <%= modelName %>          <%= modelInstance %> object (required)
+ * @apiSuccess {Object}   <%= model %>           <%= modelInstance %> object
  *
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
@@ -24,24 +24,24 @@ import <%= modalInstance %> from '../../models/<%= modal %>'
  *        Your api failed response
  *     }
  */
-export async function <%- `create${modalInstance}` %> (ctx) {
-  const <%= modalName %> = new <%= modalInstance %>(ctx.request.body.<%= modalName %>)
+export async function <%- `create${modelInstance}` %> (ctx) {
+  const <%= modelName %> = new <%= modelInstance %>(ctx.request.body.<%= modelName %>)
   try {
-    await <%= modalName %>.save()
+    await <%= modelName %>.save()
   } catch (err) {
     ctx.throw(422, err.message)
   }
-  ctx.body = { <%= modalName %> }
+  ctx.body = { <%= modelName %> }
 }
 
 /**
- * @api {get} /<%= modal %> Get all <%= modal %>
- * @apiPermission <%= modalName %>
+ * @api {get} /<%= model %> Get all <%= model %>
+ * @apiPermission <%= modelName %>
  * @apiVersion <%= version %>
- * @apiName Get<%= modalInstance %>
- * @apiGroup <%= modal %>
+ * @apiName Get<%= modelInstance %>
+ * @apiGroup <%= model %>
  *
- * @apiSuccess {Object} <%= modalName %>          <%= modalName %> objects
+ * @apiSuccess {Object} <%= modelName %>          <%= modelName %> objects
  *
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
@@ -56,19 +56,19 @@ export async function <%- `create${modalInstance}` %> (ctx) {
  *        Your api failed response
  *     }
  */
-export async function get<%= modalInstancePluralize %> (ctx) {
-  const <%= modalName %> = await <%= modalInstance %>.find(ctx.request.body.<%= modalName %>.id)
-  ctx.body = {<%= modalName %> }
+export async function get<%= modelInstancePluralize %> (ctx) {
+  const <%= modelName %> = await <%= modelInstance %>.find(ctx.request.body.<%= modelName %>.id)
+  ctx.body = {<%= modelName %> }
 }
 
 /**
- * @api {get} /<%= modal %>/:id Get <%= modalName %> by id
- * @apiPermission <%= modalName %>
+ * @api {get} /<%= model %>/:id Get <%= modelName %> by id
+ * @apiPermission <%= modelName %>
  * @apiVersion <%= version %>
- * @apiName Get<%= modalInstance %>
- * @apiGroup <%= modal %>
+ * @apiName Get<%= modelInstance %>
+ * @apiGroup <%= model %>
  *
- * @apiSuccess {Object}   <%= modal %>           <%= modalInstance %> object
+ * @apiSuccess {Object}   <%= model %>           <%= modelInstance %> object
  *
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
@@ -83,14 +83,14 @@ export async function get<%= modalInstancePluralize %> (ctx) {
  *     }
  */
  */
-export async function get<%= modalInstance %> (ctx, next) {
+export async function get<%= modelInstance %> (ctx, next) {
   try {
-    const <%= modalName %> = await <%= modalInstance %>.findById(ctx.params.id)
-    if (!<%= modalName %>) {
+    const <%= modelName %> = await <%= modelInstance %>.findById(ctx.params.id)
+    if (!<%= modelName %>) {
       ctx.throw(404)
     }
 
-    ctx.body = { <%= modalName %> }
+    ctx.body = { <%= modelName %> }
   } catch (err) {
     if (err === 404 || err.name === 'CastError') {
       ctx.throw(404)
@@ -102,13 +102,13 @@ export async function get<%= modalInstance %> (ctx, next) {
 }
 
 /**
- * @api {put} /<%= modal %>/:id Update a <%= modalName %>
- * @apiPermission  <%= modalName %>
+ * @api {put} /<%= model %>/:id Update a <%= modelName %>
+ * @apiPermission  <%= modelName %>
  * @apiVersion <%= version %>
- * @apiName Update<%= modalInstance %>
- * @apiGroup <%= modal %>
+ * @apiName Update<%= modelInstance %>
+ * @apiGroup <%= model %>
  *
- * @apiParam {Object} <%= modalName %>          <%= modalInstance %> object (required)
+ * @apiParam {Object} <%= modelName %>          <%= modelInstance %> object (required)
  *
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
@@ -125,21 +125,21 @@ export async function get<%= modalInstance %> (ctx, next) {
  *       Your api failed response
  *     }
  */
-export async function update<%= modalInstance %> (ctx) {
-  const <%= modalName %> = ctx.body.<%= modalName %>
-  Object.assign(<%= modalName %>, ctx.request.body.<%= modalName %>)
+export async function update<%= modelInstance %> (ctx) {
+  const <%= modelName %> = ctx.body.<%= modelName %>
+  Object.assign(<%= modelName %>, ctx.request.body.<%= modelName %>)
 
-  await <%= modalName %>.save()
+  await <%= modelName %>.save()
 
-  ctx.body = { <%= modalName %> }
+  ctx.body = { <%= modelName %> }
 }
 
 /**
- * @api {delete} /<%= modal %>/:id Delete a <%= modalName %>
- * @apiPermission  <%= modalName %>
+ * @api {delete} /<%= model %>/:id Delete a <%= modelName %>
+ * @apiPermission  <%= modelName %>
  * @apiVersion <%= version %>
- * @apiName Delete<%= modalInstance %>
- * @apiGroup <%= modal %>
+ * @apiName Delete<%= modelInstance %>
+ * @apiGroup <%= model %>
  *
  *
  * @apiSuccess {StatusCode} 200
@@ -158,10 +158,10 @@ export async function update<%= modalInstance %> (ctx) {
  *     }
  */
 
-export async function delete<%= modalInstance %> (ctx) {
-  const <%= modalName %> = ctx.body.<%= modalName %>
+export async function delete<%= modelInstance %> (ctx) {
+  const <%= modelName %> = ctx.body.<%= modelName %>
 
-  await <%= modalName %>.remove()
+  await <%= modelName %>.remove()
 
   ctx.status = 200
   ctx.body = { success: true }

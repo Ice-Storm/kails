@@ -1,0 +1,7 @@
+import mongoose from 'mongoose'
+
+const <%= model %> = new mongoose.Schema({<% fields.forEach((item, index) => { %>
+  <%= `${item['field']}: { type: ${item['type']} }` %><%- fields.length - 1 === index ? '' : ',' %><% }) %>
+})
+
+export default mongoose.model('<%- model.toLowerCase() %>', <%= model %>)

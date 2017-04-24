@@ -1,43 +1,43 @@
-import * as <%= modalName %> from './controller'
+import * as <%= modelName %> from './controller'
 
-export const baseUrl = '/<%= modal %>'
+export const baseUrl = '/<%= model %>'
 
 export default [
   {
     method: 'POST',
     route: '/',
     handlers: [
-      <%= modalName %>.create<%= modalInstance %>
+      <%= modelName %>.create<%= modelInstance %>
     ]
   },
   {
     method: 'GET',
     route: '/',
     handlers: [
-      user.get<%= modalInstancePluralize %>
+      user.get<%= modelInstancePluralize %>
     ]
   },
   {
     method: 'GET',
     route: '/:id',
     handlers: [
-      <%= modalName %>.get<%= modalInstance %>
+      <%= modelName %>.get<%= modelInstance %>
     ]
   },
   {
     method: 'PUT',
     route: '/:id',
     handlers: [
-      <%= modalName %>.get<%= modalInstance %>,
-      <%= modalName %>.update<%= modalInstance %>
+      <%= modelName %>.get<%= modelInstance %>,
+      <%= modelName %>.update<%= modelInstance %>
     ]
   },
   {
     method: 'DELETE',
     route: '/:id',
     handlers: [
-      <%= modalName %>.get<%= modalInstance %>,
-      <%= modalName %>.delete<%= modalInstance %>
+      <%= modelName %>.get<%= modelInstance %>,
+      <%= modelName %>.delete<%= modelInstance %>
     ]
   }
 ]
