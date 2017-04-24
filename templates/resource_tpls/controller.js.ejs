@@ -1,0 +1,168 @@
+import <%= modalInstance %> from '../../models/<%= modal %>'
+
+/**
+ * @api {post} /<%= modal %> Create a new <%= modalName %>
+ * @apiPermission <%= modalName %>
+ * @apiVersion <%= version %>
+ * @apiName <%- `Create${modalInstance}` %>
+ * @apiGroup <%= modalInstance %>
+ *
+ * @apiParam {Object} <%= modalName %>          <%= modalInstance %> object (required)
+ * @apiSuccess {Object}   <%= modal %>           <%= modalInstance %> object
+ *
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       Your api success response
+ *     }
+ *
+ * @apiError UnprocessableEntity Missing required parameters
+ *
+ * @apiErrorExample {json} Error-Response:
+ *     HTTP/1.1 422 Unprocessable Entity
+ *     {
+ *        Your api failed response
+ *     }
+ */
+export async function <%- `create${modalInstance}` %> (ctx) {
+  const <%= modalName %> = new <%= modalInstance %>(ctx.request.body.<%= modalName %>)
+  try {
+    await <%= modalName %>.save()
+  } catch (err) {
+    ctx.throw(422, err.message)
+  }
+  ctx.body = { <%= modalName %> }
+}
+
+/**
+ * @api {get} /<%= modal %> Get all <%= modal %>
+ * @apiPermission <%= modalName %>
+ * @apiVersion <%= version %>
+ * @apiName Get<%= modalInstance %>
+ * @apiGroup <%= modal %>
+ *
+ * @apiSuccess {Object} <%= modalName %>          <%= modalName %> objects
+ *
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       Your api success response
+ *     }
+ *
+ *
+ * @apiErrorExample {json} Error-Response:
+ *     HTTP/1.1 422 Unprocessable Entity
+ *     {
+ *        Your api failed response
+ *     }
+ */
+export async function get<%= modalInstancePluralize %> (ctx) {
+  const <%= modalName %> = await <%= modalInstance %>.find(ctx.request.body.<%= modalName %>.id)
+  ctx.body = {<%= modalName %> }
+}
+
+/**
+ * @api {get} /<%= modal %>/:id Get <%= modalName %> by id
+ * @apiPermission <%= modalName %>
+ * @apiVersion <%= version %>
+ * @apiName Get<%= modalInstance %>
+ * @apiGroup <%= modal %>
+ *
+ * @apiSuccess {Object}   <%= modal %>           <%= modalInstance %> object
+ *
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       Your api success response
+ *     }
+ *
+ * @apiErrorExample {json} Error-Response:
+ *     HTTP/1.1 422 Unprocessable Entity
+ *     {
+ *        Your api failed response
+ *     }
+ */
+ */
+export async function get<%= modalInstance %> (ctx, next) {
+  try {
+    const <%= modalName %> = await <%= modalInstance %>.findById(ctx.params.id)
+    if (!<%= modalName %>) {
+      ctx.throw(404)
+    }
+
+    ctx.body = { <%= modalName %> }
+  } catch (err) {
+    if (err === 404 || err.name === 'CastError') {
+      ctx.throw(404)
+    }
+    ctx.throw(500)
+  }
+
+  if (next) { return next() }
+}
+
+/**
+ * @api {put} /<%= modal %>/:id Update a <%= modalName %>
+ * @apiPermission  <%= modalName %>
+ * @apiVersion <%= version %>
+ * @apiName Update<%= modalInstance %>
+ * @apiGroup <%= modal %>
+ *
+ * @apiParam {Object} <%= modalName %>          <%= modalInstance %> object (required)
+ *
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       Your api success response
+ *     }
+ *
+ * @apiError UnprocessableEntity Missing required parameters
+ *
+ * @apiErrorExample {json} Error-Response:
+ *     HTTP/1.1 422 Unprocessable Entity
+ *     {
+ *       "status": 422,
+ *       Your api failed response
+ *     }
+ */
+export async function update<%= modalInstance %> (ctx) {
+  const <%= modalName %> = ctx.body.<%= modalName %>
+  Object.assign(<%= modalName %>, ctx.request.body.<%= modalName %>)
+
+  await <%= modalName %>.save()
+
+  ctx.body = { <%= modalName %> }
+}
+
+/**
+ * @api {delete} /<%= modal %>/:id Delete a <%= modalName %>
+ * @apiPermission  <%= modalName %>
+ * @apiVersion <%= version %>
+ * @apiName Delete<%= modalInstance %>
+ * @apiGroup <%= modal %>
+ *
+ *
+ * @apiSuccess {StatusCode} 200
+ *
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "success": true
+ *     }
+ *
+ * @apiErrorExample {json} Error-Response:
+ *     HTTP/1.1 422 Unprocessable Entity
+ *     {
+ *       "status": 422,
+ *       Your api failed response
+ *     }
+ */
+
+export async function delete<%= modalInstance %> (ctx) {
+  const <%= modalName %> = ctx.body.<%= modalName %>
+
+  await <%= modalName %>.remove()
+
+  ctx.status = 200
+  ctx.body = { success: true }
+}

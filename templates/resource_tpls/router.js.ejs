@@ -1,0 +1,43 @@
+import * as <%= modalName %> from './controller'
+
+export const baseUrl = '/<%= modal %>'
+
+export default [
+  {
+    method: 'POST',
+    route: '/',
+    handlers: [
+      <%= modalName %>.create<%= modalInstance %>
+    ]
+  },
+  {
+    method: 'GET',
+    route: '/',
+    handlers: [
+      user.get<%= modalInstancePluralize %>
+    ]
+  },
+  {
+    method: 'GET',
+    route: '/:id',
+    handlers: [
+      <%= modalName %>.get<%= modalInstance %>
+    ]
+  },
+  {
+    method: 'PUT',
+    route: '/:id',
+    handlers: [
+      <%= modalName %>.get<%= modalInstance %>,
+      <%= modalName %>.update<%= modalInstance %>
+    ]
+  },
+  {
+    method: 'DELETE',
+    route: '/:id',
+    handlers: [
+      <%= modalName %>.get<%= modalInstance %>,
+      <%= modalName %>.delete<%= modalInstance %>
+    ]
+  }
+]
